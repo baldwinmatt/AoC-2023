@@ -1,12 +1,21 @@
 #include "aoc/helpers.h"
 
+#include <array>
+
 namespace {
   using Result = std::pair<int, int>;
   using MappedFileSource = aoc::MappedFileSource<char>;
 
-  constexpr std::string_view SampleInput(R"()");
-  constexpr int SR_Part1 = 0;
-  constexpr int SR_Part2 = 0;
+  constexpr std::string_view SampleInput(R"(two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+)");
+  constexpr int SR_Part1 = 209;
+  constexpr int SR_Part2 = 281;
 
   const auto ProcessLine = [](std::string_view line) {
     int line_val = 0;
@@ -31,7 +40,43 @@ namespace {
     line_val *= 10;
     line_val += aoc::stoi({&(line.back()), 1});
 
+    DEBUG_PRINT("line: " << line << " output: " << line_val);
+
     return line_val;
+  };
+
+  constexpr std::string_view ONE{"one"};
+  constexpr std::string_view TWO{"two"};
+  constexpr std::string_view THREE{"three"};
+  constexpr std::string_view FOUR{"four"};
+  constexpr std::string_view FIVE{"five"};
+  constexpr std::string_view SIX{"six"};
+  constexpr std::string_view SEVEN{"seven"};
+  constexpr std::string_view EIGHT{"eight"};
+  constexpr std::string_view NINE{"nine"};
+
+  constexpr std::array<std::string_view, 9> NUMBERS{ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
+
+  const auto PreProcessLine = [](std::string_view line) {
+    std::string out{line.data(), line.size()};
+    std::string_view out_view{out.data(), out.size()};
+
+    size_t i = 0;
+    while (i < out.size()) {
+      for (size_t j = 0; j < NUMBERS.size(); j++) {
+        const auto& num = NUMBERS[j];
+        if (aoc::starts_with(out_view, num)) {
+          out[i] = j + '1';
+          break;
+        }
+      }
+      out_view.remove_prefix(1);
+      i+=1;
+    }
+
+    DEBUG_PRINT("input: " << line << " output: " << out);
+
+    return out;
   };
 
   const auto LoadInput = [](auto f) {
@@ -39,6 +84,7 @@ namespace {
     std::string_view line;
     while (aoc::getline(f, line)) {
       r.first += ProcessLine(line);
+      r.second += ProcessLine(PreProcessLine(line));
     }
     return r;
   };
