@@ -1,0 +1,5 @@
+Day 1
+Part 1: 54081
+Part 2: 0
+Elapsed: 0.000804 sec
+
