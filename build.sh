@@ -35,6 +35,10 @@ if [[ $# > 0 ]]; then
             mkdir -p "${new_day}"
             cp "${ROOT_DIR}/template"/* "${new_day}/"
             touch "${ROOT_DIR}/inputs/Day${1}.txt"
+            git add "${new_day}" "${ROOT_DIR}/inputs/Day${1}.txt"
+            echo "" >> solutions.txt
+            echo "Day ${1}" >> solutions.txt
+            git add solutions.txt
             exit 0
             ;;
         run)
