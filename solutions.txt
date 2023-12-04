@@ -18,3 +18,5 @@ Day 4
 Part 1: 26914
 Part 2: 13080971
 Elapsed: 0.000895 sec
+
+Day 5
