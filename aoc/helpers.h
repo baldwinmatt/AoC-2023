@@ -473,6 +473,10 @@ namespace aoc {
         }
     }
 
+    void parse_as_integers(const std::string_view s, const char delim, UnaryIntFunction op) {
+        parse_as_integers(s, std::string_view(&delim, 1), op);
+    }
+
     class AutoTimer {
     private:
         std::chrono::time_point<std::chrono::high_resolution_clock> start_;

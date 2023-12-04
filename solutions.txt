@@ -9,3 +9,12 @@ Part 2: 70950
 Elapsed: 0.000213 sec
 
 Day 3
+Elapsed: 0.000218 sec
+Part 1: 533784
+Part 2: 78826761
+Elapsed: 0.000154442 sec
+
+Day 4
+Part 1: 26914
+Part 2: 13080971
+Elapsed: 0.000895 sec
