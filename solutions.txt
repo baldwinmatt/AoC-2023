@@ -25,8 +25,8 @@ Part 2: 63179500
 Elapsed: 289.659862831 sec
 
 Day 6
-Elapsed Part 1: 0.000006 sec
-Elapsed Part 2: 0.020124790 sec
+Elapsed Part 1: 0.000001 sec
+Elapsed Part 2: 0.000010088 sec
 Part 1: 3316275
 Part 2: 27102791
-Elapsed: 0.020369804 sec
+Elapsed: 0.000080807 sec

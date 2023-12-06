@@ -53,7 +53,24 @@ Distance:  9  40  200)");
     return r;
   };
 
+  // Solve for a * x^2 + b * x + c = 0
+  const auto SolveQuadtraic = [](double a, double b, double c) -> std::pair<double, double> {
+    const auto d = (b * b - 4.0 * a * c);
+    assert(d >= 0.0);
+    const auto sqrt_d = std::sqrt(d);
+    const auto x1 = (-b + sqrt_d) / (2.0 * a);
+    const auto x2 = (-b - sqrt_d) / (2.0 * a);
+    return {std::ceil(x1), std::ceil(x2)};
+  };
+
   const auto CountWaysToWin = [](const auto &rr) {
+    const auto res = SolveQuadtraic(-1, rr.time, -rr.distance);
+    const auto start = res.first;
+    const auto end = res.second;
+    return end - start;
+  };
+
+  const auto CountWaysToWinSimple = [](const auto &rr) {
     // for each ms we hold the button, the speed will increase by 1 ms per ms
     // holding the button down counts towards race time
     // distance is (race time) - (hold time) * (hold time)
@@ -111,7 +128,7 @@ int main(int argc, char** argv) {
   {
     aoc::AutoTimer t{"Part 1"};
     for (const auto &rr : r) {
-      const auto ways_to_win = CountWaysToWin(rr);
+      const auto ways_to_win = CountWaysToWinSimple(rr);
       if (!part1) { part1 = ways_to_win; }
       else { part1 *= ways_to_win; }
     }
