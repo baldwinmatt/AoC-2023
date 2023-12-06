@@ -23,3 +23,10 @@ Day 5
 Part 1: 265018614
 Part 2: 63179500
 Elapsed: 289.659862831 sec
+
+Day 6
+Elapsed Part 1: 0.000006 sec
+Elapsed Part 2: 0.020124790 sec
+Part 1: 3316275
+Part 2: 27102791
+Elapsed: 0.020369804 sec
