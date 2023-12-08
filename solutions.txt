@@ -35,3 +35,8 @@ Day 7
 Part 1: 253910319
 Part 2: 254083736
 Elapsed: 0.001507 sec
+
+Day 8
+Part 1: 13939
+Part 2: 8906539031197
+Elapsed: 0.001414741 sec
