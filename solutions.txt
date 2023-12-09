@@ -1,44 +1,54 @@
-Day 1
+Day1
 Part 1: 54081
 Part 2: 54649
-Elapsed: 0.001280 sec
+Elapsed: 0.001148 sec
 
-Day 2
+Day2
 Part 1: 2076
 Part 2: 70950
-Elapsed: 0.000213 sec
+Elapsed: 0.000159 sec
 
-Day 3
-Elapsed: 0.000218 sec
+Day3
+Elapsed: 0.000201 sec
 Part 1: 533784
 Part 2: 78826761
-Elapsed: 0.000154442 sec
+Elapsed: 0.000156669 sec
 
-Day 4
+Day4
 Part 1: 26914
 Part 2: 13080971
-Elapsed: 0.000895 sec
+Elapsed: 0.000918 sec
 
 Day 5
+Elapsed Part 1: 0.000010718 sec
+Elapsed Part 2: 294.073913872 sec
 Part 1: 265018614
 Part 2: 63179500
-Elapsed: 289.659862831 sec
+Elapsed: 294.074196140 sec
 
-Day 6
-Elapsed Part 1: 0.000001 sec
-Elapsed Part 2: 0.000010088 sec
+Day6
+Elapsed Part 1: 0.000002 sec
+Elapsed Part 2: 0.000009023 sec
 Part 1: 3316275
 Part 2: 27102791
-Elapsed: 0.000080807 sec
+Elapsed: 0.000081380 sec
 
-Day 7
+Day7
 Part 1: 253910319
 Part 2: 254083736
-Elapsed: 0.001507 sec
+Elapsed: 0.001409 sec
 
-Day 8
+Day8
+Elapsed Part 1: 0.000117 sec
+Elapsed Part 2: 0.000757851 sec
 Part 1: 13939
 Part 2: 8906539031197
-Elapsed: 0.001414741 sec
+Elapsed: 0.001399945 sec
 
-Day 9
+Day9
+Elapsed Part 1: 0.000045 sec
+Elapsed Part 2: 0.000040389 sec
+Part 1: 1901217887
+Part 2: 905
+Elapsed: 0.000738170 sec
+

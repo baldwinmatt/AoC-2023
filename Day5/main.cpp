@@ -187,9 +187,10 @@ humidity-to-location map:
 int main(int argc, char** argv) {
   const bool inTest = argc < 2;
 
+  aoc::AutoTimer t;
   Almanac r;
   {
-    aoc::AutoTimer t;
+    aoc::AutoTimer t1{"Load"};
     if (inTest) {
       LoadInput(SampleInput, r);
     } else {
@@ -202,7 +203,7 @@ int main(int argc, char** argv) {
   int64_t part1 = INT64_MAX;
 
   {
-    aoc::AutoTimer t;
+    aoc::AutoTimer t2{ "Part 1"};
     for (const auto seed : r.Seeds) {
       const auto location = r.GetSeedLocation(seed);
       part1 = std::min(part1, location);
@@ -210,7 +211,7 @@ int main(int argc, char** argv) {
   }
   int64_t part2 = INT64_MAX;
   {
-    aoc::AutoTimer t;
+    aoc::AutoTimer t3{ "Part 2" };
     for (size_t i = 0; i < r.Seeds.size(); i += 2) {
       Range s(r.Seeds[i], r.Seeds[i + 1]);
       for (auto j = s.start; j <= s.end; j++) {
