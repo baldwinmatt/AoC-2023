@@ -15,6 +15,7 @@
 #include <functional>
 #include <iomanip>
 #include <vector>
+#include <memory>
 
 #ifndef NDEBUG
 #define DEBUG(x) do { \
@@ -29,11 +30,13 @@
 #define STRING_CONSTANT(symbol, value) constexpr std::string_view symbol(value)
 
 #ifndef INT_MIN
-#define INT_MIN std::numeric_limits<int>::min()
+constexpr auto __aoc_int_min = std::numeric_limits<int>::min();
+#define INT_MIN __aoc_int_min
 #endif
 
 #ifndef INT_MAX
-#define INT_MAX std::numeric_limits<int>::max()
+constexpr auto __aoc_int_max = std::numeric_limits<int>::max();
+#define INT_MAX __aoc_int_max
 #endif
 
 
