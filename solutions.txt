@@ -52,3 +52,8 @@ Part 1: 1901217887
 Part 2: 905
 Elapsed: 0.000738170 sec
 
+
+Day 10
+Part 1: 6820
+Part 2: 337
+Elapsed: 0.000567 sec
