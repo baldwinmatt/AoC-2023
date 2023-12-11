@@ -57,3 +57,11 @@ Day 10
 Part 1: 6820
 Part 2: 337
 Elapsed: 0.000567 sec
+
+Day 11
+Elapsed Part 1: 0.002516 sec
+Elapsed Part 2: 0.002629792 sec
+Part 1: 9648398
+Part 2: 618800410814
+Elapsed: 0.005370243 sec
+
