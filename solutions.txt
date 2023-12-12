@@ -65,3 +65,7 @@ Part 1: 9648398
 Part 2: 618800410814
 Elapsed: 0.005370243 sec
 
+Day 12
+Part 1: 8193
+Part 2: 45322533163795
+Elapsed: 0.013718 sec
