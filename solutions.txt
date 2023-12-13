@@ -69,3 +69,8 @@ Day 12
 Part 1: 8193
 Part 2: 45322533163795
 Elapsed: 0.013718 sec
+
+Day 13
+Part 1: 32371
+Part 2: 37416
+Elapsed: 0.000285 sec

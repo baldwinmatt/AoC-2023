@@ -362,6 +362,8 @@ namespace aoc {
         return out * (1 - 2 * neg);
     }
 
+    constexpr std::string_view eol_delims{"\r\n", 2};
+
     bool getline(std::string_view& s, std::string_view& out, const std::string_view delims, bool return_empty = false) {
         out = std::string_view();
         if (s.empty()) { return false; }
@@ -386,7 +388,7 @@ namespace aoc {
         return getline(s, out, std::string_view(&delim, 1));
     }
     bool getline(std::string_view& s, std::string_view& out) {
-        return getline(s, out, std::string_view("\r\n", 2));
+        return getline(s, out, eol_delims);
     }
 
     bool getline(std::istream& s, std::string& out, const std::string_view delims) {
