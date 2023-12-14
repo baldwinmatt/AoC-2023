@@ -74,3 +74,10 @@ Day 13
 Part 1: 32371
 Part 2: 37416
 Elapsed: 0.000285 sec
+
+Day 14
+Elapsed Part 2: 0.000107 sec
+Elapsed Part 2: 0.042102588 sec
+Part 1: 106378
+Part 2: 90795
+Elapsed: 0.042358228 sec

@@ -325,38 +325,42 @@ namespace aoc {
         return true;
     }
 
+    constexpr int64_t ctoi(const char c) {
+        switch (c) {
+            case '0':
+                return 0;
+            case '1':
+                return 1;
+            case '2':
+                return 2;
+            case '3':
+                return 3;
+            case '4':
+                return 4;
+            case '5':
+                return 5;
+            case '6':
+                return 6;
+            case '7':
+                return 7;
+            case '8':
+                return 8;
+            case '9':
+                return 9;
+            default:
+                throw std::runtime_error("Not an integer: `" + std::string(1, c) + "'");
+        }
+    }
+
     int64_t stoi(std::string_view sv) {
         bool neg = false;
         bool first = true;
         int64_t out = 0;
         for (const auto& c : sv) {
-            switch (c) {
-                case '0':
-                    out *= 10; break;
-                case '1':
-                    out *= 10; out += 1; break;
-                case '2':
-                    out *= 10; out += 2; break;
-                case '3':
-                    out *= 10; out += 3; break;
-                case '4':
-                    out *= 10; out += 4; break;
-                case '5':
-                    out *= 10; out += 5; break;
-                case '6':
-                    out *= 10; out += 6; break;
-                case '7':
-                    out *= 10; out += 7; break;
-                case '8':
-                    out *= 10; out += 8; break;
-                case '9':
-                    out *= 10; out += 9; break;
-                case '-':
-                    if (first) { neg = true; break; }
-                    [[fallthrough]];
-                default:
-                    throw std::runtime_error("Not an integer: `" + std::string(sv) + "'");
-            }
+            if (first && c == '-') { neg = true; continue; }
+            const auto v = ctoi(c);
+            out *= 10;
+            out += v;
             first = false;
         }
         return out * (1 - 2 * neg);
