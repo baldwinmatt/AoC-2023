@@ -104,6 +104,28 @@ namespace aoc {
         static constexpr inline point origin() noexcept {
             return {0, 0};
         }
+
+        static constexpr inline point step(CardinalDirection dir) noexcept {
+            switch (dir) {
+                case CardinalDirection::North:
+                    return up();
+                case CardinalDirection::NorthEast:
+                    return up() + right();
+                case CardinalDirection::East:
+                    return right();
+                case CardinalDirection::SouthEast:
+                    return down() + right();
+                case CardinalDirection::South:
+                    return down();
+                case CardinalDirection::SouthWest:
+                    return down() + left();
+                case CardinalDirection::West:
+                    return left();
+                case CardinalDirection::NorthWest:
+                    return up() + left();
+            }
+            return origin();
+        }
     };
 
     struct point_hash {
