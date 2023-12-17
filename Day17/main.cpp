@@ -21,7 +21,7 @@ namespace {
 2546548887735
 4322674655533)");
   constexpr int64_t SR_Part1 = 102;
-  constexpr int64_t SR_Part2 = 71;
+  constexpr int64_t SR_Part2 = 94;
 
   using Grid = aoc::PaddedMatrix<int32_t, 1>;
 
@@ -144,26 +144,28 @@ namespace {
         EnqueueNext(p, loss, p.dir, 1);
       }
 
-      // try turning in each direction (except our opposite)
-      switch (p.dir) {
-        case aoc::CardinalDirection::East:
-          EnqueueNext(p, loss, aoc::CardinalDirection::North, bounds.min);
-          EnqueueNext(p, loss, aoc::CardinalDirection::South, bounds.min);
-          break;
-        case aoc::CardinalDirection::North:
-          EnqueueNext(p, loss, aoc::CardinalDirection::West, bounds.min);
-          EnqueueNext(p, loss, aoc::CardinalDirection::East, bounds.min);
-          break;
-        case aoc::CardinalDirection::South:
-          EnqueueNext(p, loss, aoc::CardinalDirection::West, bounds.min);
-          EnqueueNext(p, loss, aoc::CardinalDirection::East, bounds.min);
-          break;
-        case aoc::CardinalDirection::West:
-          EnqueueNext(p, loss, aoc::CardinalDirection::North, bounds.min);
-          EnqueueNext(p, loss, aoc::CardinalDirection::South, bounds.min);
-          break;
-        default:
-          throw std::runtime_error("Unknown direction");
+      if (p.steps >= bounds.min) {
+        // try turning in each direction (except our opposite)
+        switch (p.dir) {
+          case aoc::CardinalDirection::East:
+            EnqueueNext(p, loss, aoc::CardinalDirection::North, bounds.min);
+            EnqueueNext(p, loss, aoc::CardinalDirection::South, bounds.min);
+            break;
+          case aoc::CardinalDirection::North:
+            EnqueueNext(p, loss, aoc::CardinalDirection::West, bounds.min);
+            EnqueueNext(p, loss, aoc::CardinalDirection::East, bounds.min);
+            break;
+          case aoc::CardinalDirection::South:
+            EnqueueNext(p, loss, aoc::CardinalDirection::West, bounds.min);
+            EnqueueNext(p, loss, aoc::CardinalDirection::East, bounds.min);
+            break;
+          case aoc::CardinalDirection::West:
+            EnqueueNext(p, loss, aoc::CardinalDirection::North, bounds.min);
+            EnqueueNext(p, loss, aoc::CardinalDirection::South, bounds.min);
+            break;
+          default:
+            throw std::runtime_error("Unknown direction");
+        }
       }
     }
 
