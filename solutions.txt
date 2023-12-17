@@ -95,3 +95,5 @@ Elapsed Part 2: 0.249763903 sec
 Part 1: 6906
 Part 2: 7330
 Elapsed: 0.251184002 sec
+
+Day 17
