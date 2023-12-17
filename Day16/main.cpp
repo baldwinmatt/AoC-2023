@@ -62,7 +62,7 @@ namespace {
   };
 
   const auto PrintGrid = [](const Grid& g, const EnergizedGrid& e) {
-    aoc::cls(std::cout);
+    aoc::reset(std::cout);
     for (ssize_t y = -1; y < g.get_height() + 1; ++y) {
       for (ssize_t x = -1; x < g.get_width() + 1; ++x) {
         char c = g.at(x, y);
@@ -79,15 +79,13 @@ namespace {
     }
   };
 
-  const auto EnergizeGrid = [](const Grid& g, Beam initial) {
+  const auto EnergizeGrid = [](const Grid& g, Beam initial, Visited& visited) {
     EnergizedGrid e;
     e.set_width(g.get_width());
     e.set_height(g.get_height());
     
     Beams beams;
     beams.push(initial);
-
-    Visited visited;
 
     while (!beams.empty()) {
       auto b = beams.top();
@@ -111,18 +109,24 @@ namespace {
           }
           case '|':
           {
-            // split, this beam goes north, the new beam goes south
-            b.dir = aoc::CardinalDirection::North;
-            // add a new beam
-            beams.emplace(aoc::point{ b.pos.x, b.pos.y + 1}, aoc::CardinalDirection::South);
+            if (b.dir != aoc::CardinalDirection::South &&
+              b.dir != aoc::CardinalDirection::North) {
+              // split, this beam goes north, the new beam goes south
+              b.dir = aoc::CardinalDirection::North;
+              // add a new beam
+              beams.emplace(aoc::point{ b.pos.x, b.pos.y + 1}, aoc::CardinalDirection::South);
+            }
             break;
           }
           case '-':
           {
-            // split, this beam goes east, the new beam goes west
-            b.dir = aoc::CardinalDirection::East;
-            // add a new beam
-            beams.emplace(aoc::point{ b.pos.x - 1, b.pos.y }, aoc::CardinalDirection::West);
+            if (b.dir != aoc::CardinalDirection::East &&
+              b.dir != aoc::CardinalDirection::West) {
+              // split, this beam goes east, the new beam goes west
+              b.dir = aoc::CardinalDirection::East;
+              // add a new beam
+              beams.emplace(aoc::point{ b.pos.x - 1, b.pos.y }, aoc::CardinalDirection::West);
+            }
             break;
           }
           case '/':
@@ -180,9 +184,9 @@ namespace {
         }
         DEBUG(
           PrintGrid(g, e);
-          std::cout << "Beams: " << beams.size() << std::endl;
-          std::cout << "Current: " << b.pos << " " << b.dir << " visited " << visited.size() << std::endl;
-          std::this_thread::sleep_for(std::chrono::milliseconds(10));
+          std::cout << "Beams: " << beams.size() << "                    " << std::endl;
+          std::cout << "Current: " << b.pos << " " << b.dir << " visited " << visited.size() << "                    " << std::endl;
+          //std::this_thread::sleep_for(std::chrono::milliseconds(10));
         );
       }
     }
@@ -210,11 +214,20 @@ int main(int argc, char** argv) {
     g = LoadInput(f);
   }
 
+  DEBUG(
+    aoc::cls(std::cout);
+  );
+
+  Visited visited;
   int64_t part1{};
   {
     aoc::AutoTimer t2{"Part 1"};
-    part1 = EnergizeGrid(g, Beam{ aoc::point{ 0, 0 }, aoc::CardinalDirection::East });
+    part1 = EnergizeGrid(g, Beam{ aoc::point{ 0, 0 }, aoc::CardinalDirection::East }, visited);
   }
+
+  DEBUG(
+    getchar();
+  );
 
   // find ideal start position
   int64_t part2{part1};
@@ -235,25 +248,29 @@ int main(int argc, char** argv) {
 
     struct Reducer {
       const Grid& g;
+      Visited& v;
 
-      Reducer(const Grid& g) : g(g) {}
+      Reducer(const Grid& g, Visited& v) : g(g), v(v) {}
       
       int64_t operator()(const int64_t e, const Beam& b) {
-        return std::max(e, EnergizeGrid(g, b));
+        v.clear();
+        return std::max(e, EnergizeGrid(g, b, v));
       }
 
       int64_t operator()(const int64_t e, const int64_t b) {
         return std::max(e, b);
       }
       int64_t operator()(const Beam& e, const Beam& b) {
-        return std::max(EnergizeGrid(g, e), EnergizeGrid(g, b));
+        v.clear();
+        return std::max(EnergizeGrid(g, e, v), EnergizeGrid(g, b, v));
       }
       int64_t operator()(const Beam& e, const int64_t b) {
-        return std::max(EnergizeGrid(g, e), b);
+        v.clear();
+        return std::max(EnergizeGrid(g, e, v), b);
       }
     };
 
-    Reducer r(g);
+    Reducer r(g, visited);
 
     part2 = std::accumulate(beams.cbegin(), beams.cend(), part1, r);
   }

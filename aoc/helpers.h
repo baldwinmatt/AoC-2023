@@ -282,6 +282,10 @@ namespace aoc {
         return os << "\033[2J\033[1;1H";
     }
 
+    std::ostream& reset(std::ostream& os) {
+        return os << "\033[1;1H";
+    }
+
     bool ends_with(const std::string_view s, const std::string_view p) {
         if (s.size() < p.size()) { return false; }
         const auto e = s.substr(s.size() - p.size());

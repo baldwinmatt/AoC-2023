@@ -89,8 +89,9 @@ Part 1: 503487
 Part 2: 261505
 Elapsed: 0.001043237 sec
 
-Day 16Elapsed Part 1: 0.001652 sec
-Elapsed Part 2: 0.408654682 sec
+Day 16
+Elapsed Part 1: 0.001058 sec
+Elapsed Part 2: 0.249763903 sec
 Part 1: 6906
 Part 2: 7330
-Elapsed: 0.410690689 sec
+Elapsed: 0.251184002 sec
