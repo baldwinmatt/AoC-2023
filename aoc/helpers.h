@@ -39,8 +39,33 @@ constexpr auto __aoc_int_max = std::numeric_limits<int>::max();
 #define INT_MAX __aoc_int_max
 #endif
 
+struct HexArray {
+    uint_fast8_t is_hex[256];
+    uint_fast8_t int_val[256];
+
+    constexpr HexArray()
+        : is_hex()
+        , int_val() {
+            for (int i = 0; i < 256; i++) {
+                is_hex[i] = (i >= '0' && i <= '9') ||
+                    (i >= 'a' && i <= 'f') ||
+                    (i >= 'A' && i <= 'F');
+                int_val[i] = (i >= '0' && i <= '9') ? i - '0' :
+                            ((i >= 'a' && i <= 'f') ? i - 'a' + 10 :
+                            ((i >= 'A' && i <= 'F') ? i - 'A' + 10: -1));
+            }
+        }
+};
 
 namespace aoc {
+
+    constexpr static const HexArray __HEX_ARRAY = HexArray();
+
+    static inline int
+    char_hex_val(int c) noexcept {
+        // cast to char so that ((uint8_t)-1) becomes -1
+        return  static_cast<signed char>(__HEX_ARRAY.int_val[static_cast<uint8_t>(c)]);
+    }
 
     using Point = std::pair<int64_t, int64_t>;
 
@@ -435,6 +460,15 @@ namespace aoc {
             }
         }
         return !out.empty() || s.good();
+    }
+
+    std::vector<std::string_view> split(std::string_view& s, const std::string_view delims) {
+        std::vector<std::string_view> out;
+        std::string_view l;
+        while (getline(s, l, delims)) {
+            out.push_back(l);
+        }
+        return out;
     }
 
     using UnaryIntFunction = std::function<void(const int64_t)>;

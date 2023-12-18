@@ -169,6 +169,39 @@ namespace aoc {
         os << "{ " << p.x << ", " << p.y << " }";
         return os;
     }
+
+    enum class PerimiterMode {
+        None,
+        Include,
+        Exclude,
+    };
+
+    template<class InputIt>
+    int64_t area(InputIt start, InputIt end, PerimiterMode mode = PerimiterMode::None) {
+        // calculate the area of the enclosed path.
+        int64_t area{};
+        int64_t perimeter{};
+        while (start != end && (start + 1) != end) {
+            auto& a = *start;
+            auto& b = *(start + 1);
+            area += a.x * b.y - a.y * b.x;
+            perimeter += a.manhattan(b);
+            start++;
+        }
+
+        switch (mode) {
+            case PerimiterMode::None:
+                break;
+            case PerimiterMode::Include:
+                area += perimeter;
+                break;
+            case PerimiterMode::Exclude:
+                area -= perimeter;
+                break;
+        }
+        area = (std::abs(area)) / 2;
+        return area + 1;
+    }
 }
 
 
