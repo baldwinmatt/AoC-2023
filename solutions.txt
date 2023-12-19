@@ -97,5 +97,17 @@ Part 2: 7330
 Elapsed: 0.251184002 sec
 
 Day 17
+Elapsed Part 1: 0.089619 sec
+Elapsed Part 2: 0.360769875 sec
+Part 1: 845
+Part 2: 993
+Elapsed: 0.450778075 sec
 
 Day 18
+Elapsed Part 1: 0.000003 sec
+Elapsed Part 2: 0.000001348 sec
+Part 1: 42317
+Part 2: 83605563360288
+Elapsed: 0.000247600 sec
+
+Day 19
