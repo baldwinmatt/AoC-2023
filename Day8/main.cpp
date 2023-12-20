@@ -83,15 +83,6 @@ XXX = (XXX, XXX))");
     }
     return r;
   };
-
-  int64_t FindLeastCommonMultiple(std::vector<int64_t> v, size_t idx) {
-    if (idx == v.size() - 1) {
-      return v[idx];
-    }
-    const auto a = v[idx];
-    const auto b = FindLeastCommonMultiple(v, idx + 1);
-    return (a * b / std::__gcd(a, b));
-  }
 }
 
 int main(int argc, char** argv) {
@@ -141,7 +132,7 @@ int main(int argc, char** argv) {
       }
       distances.push_back(d);
     }
-    part2 = FindLeastCommonMultiple(distances, 0);
+    part2 = aoc::lcm(distances.begin(), distances.end());
   }
 
   if (inTest) {

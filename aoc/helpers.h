@@ -565,6 +565,17 @@ namespace aoc {
 
     };
 
+    template<typename It>
+    typename It::value_type lcm(It pos, It last) {
+        const auto a = *pos;
+        pos++;
+        if (pos == last) {
+            return a;
+        }
+        const auto b = lcm(pos, last);
+        return (a * b / std::__gcd(a, b));
+    }
+
     template<typename T>
     class MappedFileSource {
     public:
