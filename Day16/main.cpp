@@ -186,7 +186,7 @@ namespace {
           PrintGrid(g, e);
           std::cout << "Beams: " << beams.size() << "                    " << std::endl;
           std::cout << "Current: " << b.pos << " " << b.dir << " visited " << visited.size() << "                    " << std::endl;
-          //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+          std::this_thread::sleep_for(std::chrono::milliseconds(10));
         );
       }
     }
@@ -226,7 +226,7 @@ int main(int argc, char** argv) {
   }
 
   DEBUG(
-    getchar();
+    exit(1);
   );
 
   // find ideal start position
