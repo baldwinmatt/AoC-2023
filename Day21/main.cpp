@@ -2,7 +2,7 @@
 #include "aoc/padded_matrix.h"
 #include "aoc/point.h"
 
-#include <set>
+#include <unordered_set>
 
 namespace {
   using Result = std::pair<int, int>;
@@ -50,7 +50,7 @@ namespace {
     return r;
   };
 
-  using Positions = std::set<aoc::point>;
+  using Positions = std::unordered_set<aoc::point, aoc::point_hash>;
 
   const auto Step = [](const Map& m, Positions& positions, bool expand = false, Positions* history = nullptr) {
     Positions next_positions;

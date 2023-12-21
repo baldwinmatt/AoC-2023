@@ -120,8 +120,9 @@ Part 2: 262775362119547
 Elapsed: 0.072932444 sec
 
 Day 21
-Elapsed Part 1: 0.028551 sec
-Elapsed Part 2: 0.184841187 sec
+Elapsed Part 1: 0.022326 sec
+Elapsed Part 2: 0.128031091 sec
 Part 1: 3847
 Part 2: 637537341306357
-Elapsed: 0.213761662 sec
+Elapsed: 0.150668975 sec
+
