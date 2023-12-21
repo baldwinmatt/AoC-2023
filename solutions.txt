@@ -113,3 +113,15 @@ Elapsed: 0.000247600 sec
 Day 19
 
 Day 20
+Elapsed Part 1: 0.004277 sec
+Elapsed Part 2: 0.068493799 sec
+Part 1: 670984704
+Part 2: 262775362119547
+Elapsed: 0.072932444 sec
+
+Day 21
+Elapsed Part 1: 0.028551 sec
+Elapsed Part 2: 0.184841187 sec
+Part 1: 3847
+Part 2: 637537341306357
+Elapsed: 0.213761662 sec
