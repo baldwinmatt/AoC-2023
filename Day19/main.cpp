@@ -3,6 +3,7 @@
 #include <queue>
 #include <algorithm>
 #include <numeric>
+#include "aoc/range.h"
 
 namespace {
   using MappedFileSource = aoc::MappedFileSource<char>;
@@ -112,11 +113,7 @@ hdj{m>838:A,pv}
   using RulesMap = std::map<std::string, Rule, std::less<>>;
   using PartList = std::vector<Part>;
 
-  struct Range {
-    int min;
-    int max;
-  };
-
+  using Range = aoc::Range<int32_t>;
   using PropertyRangeMap = std::map<char, Range>;
   using RuleRange = std::pair<std::string_view, PropertyRangeMap>;
   using RuleQueue = std::queue<RuleRange>;
@@ -195,66 +192,70 @@ hdj{m>838:A,pv}
   };
 
   int64_t CheckRule(const RulesMap& rules, std::string_view name, PropertyRangeMap& m) {
+    DEBUG_PRINT("Check " << name);
     if (name == "R") {
       return 0;
     }
     else if (name == "A") {
-      return std::accumulate(m.begin(), m.end(), 1ll, [](int64_t acc, const auto& p)
+      const auto r = std::accumulate(m.begin(), m.end(), 1ll, [](int64_t acc, const auto& p)
         {
-          DEBUG_PRINT("A " << p.first << " " << p.second.min << " " << p.second.max);
-          return acc * (p.second.max - p.second.min + 1);
+          DEBUG_PRINT("A " << p.first << " " << p.second.Start() << "-" << p.second.Last());
+          return acc * (p.second.Length() + 1);
         });
+      DEBUG_PRINT("r: " << r);
+      return r;
     }
 
     const auto it = rules.find(name);
-    if (it == rules.end()) {
-      throw std::runtime_error("Invalid rule " + std::string(name));
-    }
+    assert(it != rules.end());
 
     int64_t sum = 0;
+    const auto& subrules = it->second.subrules;
 
-    for (const auto& sr : it->second.subrules) {
-      if (sr.op == Condition::None) {
-        sum += CheckRule(rules, sr.target, m);
+    for (const auto& rule : subrules) {
+      if (rule.op == Condition::None) {
+        const auto sub = CheckRule(rules, rule.target, m);
+        DEBUG_PRINT("Terminal: " << name << " sum: " << sub);
+        sum += sub;
         continue;
       }
 
-      auto range_it = m.find(sr.c);
-      if (range_it == m.end()) {
-        throw std::runtime_error("Invalid property");
-      }
-
-      switch (sr.op) {
+      auto range_it = m.find(rule.c);
+      assert(range_it != m.end());
+      auto &range = range_it->second;
+      switch (rule.op) {
         case Condition::LessThan:
-          if (range_it->second.max < sr.rhs) {
-            sum += CheckRule(rules, sr.target, m);
-            return sum;
-          } else if (range_it->second.min < sr.rhs) {
+          if (range.Last() < rule.rhs) {
+            return sum + CheckRule(rules, rule.target, m);
+          } else if (range.Start() < rule.rhs) {
             // split it
             auto new_ranges = m;
-            new_ranges[sr.c].max = sr.rhs - 1;
-            m[sr.c].min = sr.rhs;
-            DEBUG_PRINT("Split " << sr.target << "  at " << sr.rhs << "[ " << new_ranges[sr.c].min << ", " << new_ranges[sr.c].max << " ]"
-              << " [" << m[sr.c].min << ", " << m[sr.c].max << " ]");
-            sum += CheckRule(rules, sr.target, new_ranges);
+            auto split_range = range.Split(rule.rhs - 1);
+            new_ranges[rule.c] = split_range->second;
+            const auto sub = CheckRule(rules, rule.target, new_ranges);
+            DEBUG_PRINT("Recurse: " << name << " sum: " << sub);
+            sum += sub;
+            range = split_range->second;
           }
           break;
         case Condition::GreaterThan:
-          if (range_it->second.min > sr.rhs) {
-            sum += CheckRule(rules, sr.target, m);
-            return sum;
-          } else if (range_it->second.max > sr.rhs) {
+          if (range.Start() > rule.rhs) {
+            return sum + CheckRule(rules, rule.target, m);
+          } else if (range.Last() > rule.rhs) {
             // split it
             auto new_ranges = m;
-            new_ranges[sr.c].min = sr.rhs + 1;
-            sum += CheckRule(rules, sr.target, new_ranges);
-            m[sr.c].max = sr.rhs;
+            auto split_range = range.Split(rule.rhs);
+            new_ranges[rule.c] = split_range->second;
+            const auto sub = CheckRule(rules, rule.target, new_ranges);
+            DEBUG_PRINT("Recurse: " << name << " sum: " << sub);
+            sum += sub;
+            range = split_range->first;
           }
           break;
 
         default:
           throw std::runtime_error("Invalid condition");
-    }
+      }
     }
 
     return sum;
@@ -318,10 +319,10 @@ int main(int argc, char** argv) {
     aoc::AutoTimer t2{"Part 2"};
     constexpr int max = 4000;
     PropertyRangeMap m{
-      { 'x', {1, max} },
-      { 'm', {1, max} },
-      { 'a', {1, max} },
-      { 's', {1, max} }
+      { 'x', Range::FromFirstAndLast(1, max) },
+      { 'm', Range::FromFirstAndLast(1, max) },
+      { 'a', Range::FromFirstAndLast(1, max) },
+      { 's', Range::FromFirstAndLast(1, max) }
     };
 
     part2 = CheckRule(r.rules, "in", m);
