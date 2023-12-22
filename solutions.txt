@@ -126,3 +126,11 @@ Part 1: 3847
 Part 2: 637537341306357
 Elapsed: 0.150668975 sec
 
+Day 22
+Elapsed Part 1: 0.000020 sec
+Elapsed Part 2: 0.001656343 sec
+Part 1: 530
+Part 2: 93292
+Elapsed: 0.029295914 sec
+
+Day 23
