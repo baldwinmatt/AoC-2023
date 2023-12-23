@@ -240,6 +240,12 @@ namespace aoc {
         return fromBearing(bearing);
     }
 
+    CardinalDirection reverse(CardinalDirection dir) {
+        int32_t bearing = static_cast<int32_t>(dir);
+        bearing += 180;
+        return fromBearing(bearing);
+    }
+
     aoc::Point stepFromCardinalDirection(CardinalDirection dir) {
         switch (dir) {
             case CardinalDirection::North:

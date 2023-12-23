@@ -65,6 +65,18 @@ namespace aoc {
             return at(p.first, p.second);
         }
 
+        typename std::vector<T>::reference at(ssize_t x, ssize_t y) {
+            return data[offset(x, y)];
+        }
+
+        typename std::vector<T>::reference at(const point& p) {
+            return at(p.x, p.y);
+        }
+
+        typename std::vector<T>::reference at(const Point& p) {
+            return at(p.first, p.second);
+        }
+
         ssize_t get_width() const {
             return width;
         }
