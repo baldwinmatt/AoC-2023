@@ -134,3 +134,8 @@ Part 2: 93292
 Elapsed: 0.029295914 sec
 
 Day 23
+Elapsed Part 1: 0.005469 sec
+Elapsed Part 2: 1.429417780 sec
+Part 1: 2438
+Part 2: 6658
+Elapsed: 1.435196783 sec

@@ -53,6 +53,14 @@ namespace aoc {
             }
         }
 
+        constexpr bool in_bounds(ssize_t x, ssize_t y) const {
+            return x >= 0 && x < width && y >= 0 && y < height;
+        }
+
+        constexpr bool in_bounds(const point& p) const {
+            return in_bounds(p.x, p.y);
+        }
+
         typename std::vector<T>::const_reference at(ssize_t x, ssize_t y) const {
             return data[offset(x, y)];
         }
