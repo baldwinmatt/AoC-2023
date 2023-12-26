@@ -146,3 +146,8 @@ Elapsed Part 2: 0.000003620 sec
 Part 1: 25433
 Part 2: 885093461440405
 Elapsed: 0.000972673 sec
+
+Day 25
+Elapsed Part 1: 4.714328 sec
+Part 1: 582626
+Elapsed: 4.716618357 sec
